@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Reservas Pusheen Cakes</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    h3 { margin-top: 20px; }
+    label { display: block; margin: 5px 0; }
+    input[type="text"], input[type="date"], input[type="time"] {
+      padding: 5px; margin: 5px 0 15px 0; width: 200px;
+    }
+    button {
+      padding: 8px 12px; background-color: #4CAF50; color: white;
+      border: none; cursor: pointer; font-size: 14px; margin-right: 5px;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    table {
+      border-collapse: collapse; width: 100%; margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ccc; padding: 8px; text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    #buscarPedido {
+      padding: 8px; width: 300px; margin-top: 20px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Haz tu pedido en Pusheen Cakes</h1>
+
+  <form id="pedidoForm">
+    <input type="hidden" id="pedidoId" value="" />
+    <h3>Fecha y hora</h3>
+    <input type="date" id="fecha" name="fecha" min="2020-01-01" max="2025-12-31" required />
+    <input type="time" id="hora" name="hora" min="10:00:00" max="22:30:00" required />
+
+    <h3>Productos</h3>
+    <label><input type="checkbox" name="productos" value="Bague" /> Bague</label>
+    <label><input type="checkbox" name="productos" value="Croissant" /> Croissant</label>
+    <label><input type="checkbox" name="productos" value="Mogolla" /> Mogolla</label>
+
+    <h3>Datos personales</h3>
+    <input type="text" id="nombre" name="nombre" placeholder="Nombre" required />
+    <input type="text" id="apellido" name="apellido" placeholder="Apellido" required />
+    <input type="text" id="telefono" name="telefono" placeholder="Teléfono" required />
+    <input type="text" id="celular" name="celular" placeholder="Celular" required />
+
+    <button type="submit" id="btnEnviar">Enviar pedido</button>
+    <button type="button" id="btnCancelarEdicion" style="display:none; background-color:#f44336;">Cancelar edición</button>
+  </form>
+
+  <input type="text" id="buscarPedido" placeholder="Buscar pedido por nombre, producto o fecha..." />
+
+  <table id="tablaPedidos">
+    <thead>
+      <tr>
+        <th>Fecha</th>
+        <th>Hora</th>
+        <th>Productos</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Teléfono</th>
+        <th>Celular</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Aquí se insertarán dinámicamente los pedidos -->
+    </tbody>
+  </table>
+
+  <script>
+    const form = document.getElementById('pedidoForm');
+    const tablaBody = document.querySelector('#tablaPedidos tbody');
+    const buscarInput = document.getElementById('buscarPedido');
+    const btnCancelarEdicion = document.getElementById('btnCancelarEdicion');
+    const btnEnviar = document.getElementById('btnEnviar');
+
+    let pedidos = []; // guardaremos aquí los pedidos
+    let editandoId = null;
+
+    // Función para cargar pedidos desde backend
+    async function cargarPedidos() {
+      try {
+        const res = await fetch('/api/postres');
+        pedidos = await res.json();
+        mostrarPedidos(pedidos);
+      } catch (error) {
+        alert('Error cargando pedidos: ' + error.message);
+      }
+    }
+
+    // Mostrar pedidos en la tabla
+    function mostrarPedidos(lista) {
+      tablaBody.innerHTML = '';
+      if (lista.length === 0) {
+        tablaBody.innerHTML = '<tr><td colspan="8">No hay pedidos para mostrar</td></tr>';
+        return;
+      }
+
+      lista.forEach(pedido => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${pedido.fecha}</td>
+          <td>${pedido.hora}</td>
+          <td>${pedido.productos.join(', ')}</td>
+          <td>${pedido.nombre}</td>
+          <td>${pedido.apellido}</td>
+          <td>${pedido.telefono}</td>
+          <td>${pedido.celular}</td>
+          <td>
+            <button onclick="editarPedido('${pedido._id}')">Editar</button>
+            <button onclick="eliminarPedido('${pedido._id}')">Eliminar</button>
+          </td>
+        `;
+        tablaBody.appendChild(tr);
+      });
+    }
+
+    // Manejar envío del formulario (crear o actualizar)
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const productos = [...form.querySelectorAll('input[name="productos"]:checked')].map(cb => cb.value);
+      if (productos.length === 0) {
+        alert('Selecciona al menos un producto');
+        return;
+      }
+
+      const pedidoData = {
+        fecha: form.fecha.value,
+        hora: form.hora.value,
+        productos: productos,
+        nombre: form.nombre.value.trim(),
+        apellido: form.apellido.value.trim(),
+        telefono: form.telefono.value.trim(),
+        celular: form.celular.value.trim(),
+      };
+
+      try {
+        if (editandoId) {
+          // Actualizar pedido
+          const res = await fetch(`/api/postres/${editandoId}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(pedidoData),
+          });
+          if (!res.ok) throw new Error('Error al actualizar pedido');
+          alert('Pedido actualizado');
+          editandoId = null;
+          btnEnviar.textContent = 'Enviar pedido';
+          btnCancelarEdicion.style.display = 'none';
+        } else {
+          // Crear nuevo pedido
+          const res = await fetch('/api/postres', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(pedidoData),
+          });
+          if (!res.ok) throw new Error('Error al crear pedido');
+          alert('Pedido creado');
+        }
+        form.reset();
+        cargarPedidos();
+      } catch (error) {
+        alert(error.message);
+      }
+    });
+
+    // Función para editar un pedido
+    window.editarPedido = async function(id) {
+      const pedido = pedidos.find(p => p._id === id);
+      if (!pedido) return alert('Pedido no encontrado');
+
+      editandoId = id;
+      btnEnviar.textContent = 'Actualizar pedido';
+      btnCancelarEdicion.style.display = 'inline-block';
+
+      form.fecha.value = pedido.fecha;
+      form.hora.value = pedido.hora;
+      form.nombre.value = pedido.nombre;
+      form.apellido.value = pedido.apellido;
+      form.telefono.value = pedido.telefono;
+      form.celular.value = pedido.celular;
+
+      // Marcar productos seleccionados
+      form.querySelectorAll('input[name="productos"]').forEach(cb => {
+        cb.checked = pedido.productos.includes(cb.value);
+      });
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    // Cancelar edición
+    btnCancelarEdicion.addEventListener('click', () => {
+      editandoId = null;
+      form.reset();
+      btnEnviar.textContent = 'Enviar pedido';
+      btnCancelarEdicion.style.display = 'none';
+    });
+
+    // Función para eliminar pedido
+    window.eliminarPedido = async function(id) {
+      if (!confirm('¿Seguro que deseas eliminar este pedido?')) return;
+
+      try {
+        const res = await fetch(`/api/postres/${id}`, { method: 'DELETE' });
+        if (!res.ok) throw new Error('Error al eliminar pedido');
+        alert('Pedido eliminado');
+        cargarPedidos();
+      } catch (error) {
+        alert(error.message);
+      }
+    };
+
+    // Buscador de pedidos
+    buscarInput.addEventListener('input', () => {
+      const texto = buscarInput.value.toLowerCase();
+      const filtrados = pedidos.filter(pedido => {
+        return (
+          pedido.nombre.toLowerCase().includes(texto) ||
+          pedido.apellido.toLowerCase().includes(texto) ||
+          pedido.productos.some(prod => prod.toLowerCase().includes(texto)) ||
+          pedido.fecha.toLowerCase().includes(texto)
+        );
+      });
+      mostrarPedidos(filtrados);
+    });
+
+    // Cargar pedidos al inicio
+    cargarPedidos();
+  </script>
+</body>
+</html>

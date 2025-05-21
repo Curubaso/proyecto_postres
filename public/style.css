@@ -1,0 +1,503 @@
+body {
+	font-family: Arial, sans-serif;
+	width: 1500px;
+  height: 1500px;
+  margin: auto ;
+}
+
+header {
+  font-family: Lucida Handwriting;
+  font-size: 35px;
+	background-color: #FFD6D6;
+	color: white;
+	padding: 30px;
+	text-align: center;
+}
+nav {
+  text-align: center;
+  font-family: Comic Sans MS;
+  font-size: 20px;
+	background-color: white;
+	border-bottom: 5px solid #FFD6D6;
+}
+nav li {
+	display: inline-block;
+	margin-right: 60px;
+}
+nav a {
+	color: black;
+	text-decoration: 50px;
+}
+
+
+
+sectionblanco1 {
+  float: left;
+  background-color: #EFD3CC;
+  width: 250px;
+  height: 1550px;
+}
+sectionblanco2 {
+  float: right;
+  background-color: #EFD3CC;
+  width: 250px;
+  height: 1550px;
+}
+sectionblancomenu {
+  float: left;
+  background-color: #EFD3CC;
+  width: 250px;
+  height: 1650px;
+}
+sectionblancomenu2 {
+  float: right;
+  background-color: #EFD3CC;
+  width: 250px;
+  height: 1650px;
+}
+sectionblancoreserva {
+  float: left;
+  background-color: #EFD3CC;
+  width: 250px;
+  height: 1650px;
+}
+sectionblancoreserva2 {
+  float: right;
+  background-color: #EFD3CC;
+  width: 250px;
+  height: 1650px;
+}
+sectionblancosuscripcion {
+  float: left;
+  background-color: #EFD3CC;
+  width: 250px;
+  height: 900px;
+}
+sectionblancosuscripcion2 {
+  float: right;
+  background-color: #EFD3CC;
+  width: 250px;
+  height: 900px;
+}
+sectionblancocontacto {
+  float: left;
+  background-color: #EFD3CC;
+  width: 250px;
+  height: 770px;
+}
+sectionblancocontacto2 {
+  float: right;
+  background-color: #EFD3CC;
+  width: 250px;
+  height: 770px;
+}
+
+
+
+
+.galleria {
+	float:left;
+	width: 1000px;
+  height: 550px;
+}
+asideinicio {
+  font-family: Comic Sans MS;
+  text-align: center;
+  line-height: 60px;
+  font-size: 20px;
+  width: 150px;
+  height: 1200px;
+}
+sectionestrellas {
+  line-height: 30px;
+  width: 250px;
+  height: 50px;
+}
+sectionestrellas p {
+  text-align: center;
+}
+sectionestrellas label {
+  font-size: 50px;
+}
+input[type="radio"] {
+  display: none;
+}
+label {
+  color: #B9ADAD;
+}
+.clasificacion{
+  direction: rtl;
+  unicode-bidi: bidi-override;
+}
+label:hover,
+label:hover ~ label {
+  color: #EFD3CC;
+}
+input[type="radio"]:checked ~ label {
+  color: #EFD3CC;
+}
+
+
+
+.menu {
+  margin-left: 30px;
+	float: left;
+	width: 400px;
+  height: 1480px;
+}
+asidemenu {
+  font-family: Comic Sans MS;
+  width: 500px;
+  height: 700px;
+  float:left;
+}
+.platos {
+	border-bottom: 3px solid #FFD6D6;
+	margin-bottom: 3px;
+	padding-bottom: 3px;
+}
+.platos img {
+	float:right;
+	margin-left;: 100px;
+}
+.precio {
+  color: #FFD6D6;
+  text-align: center;
+  font-size: 30px;
+  font-family: Lucida Handwriting;
+	font-weight:bold;
+}
+.botonmenu {
+  color: black;
+  font-size: 25px;
+  margin-top: 30px;
+  margin-left: 265px;
+  background-color: #EFD3CC;
+  text-decoration: 50px;
+  border:2px solid;
+}
+.botonpedir {
+  color: black;
+  font-size: 25px;
+  margin-top: 30px;
+  margin-left: 500px;
+  background-color: #EFD3CC;
+  text-decoration: 50px;
+  border:2px solid;
+}
+.botons{
+  color: black;
+  font-size: 25px;
+   margin-top: 30px;
+  margin-left: 465px;
+  background-color: #EFD3CC;
+  border: 2px solid;
+  text-decoration: 50px;
+}
+
+
+asidereserva {
+  font-family: Comic Sans MS;
+  width: 500px;
+  height: 1400px;
+  float:left;
+}
+.reserva {
+  float: left;
+  margin-left: 50px; 
+	
+}
+.opcion {
+	border-bottom: 3px solid white;
+	margin-bottom: 3px;
+	padding-bottom: 3px;
+}
+.boton {
+  color: black;
+  font-size: 25px;
+  margin-top: 30px;
+  margin-left: 500px;
+  background-color: #EFD3CC;
+  text-decoration: 50px;
+  border:2px solid;
+}
+.ventana {
+  background: #B9ADAD;
+  font-family: Comic Sans MS;
+  font-size: 30px;
+  text-align: center;
+  width: 600px;
+  height: 100px;
+  padding: 30px;
+  min-height: 50px;
+  border-radius: 30px;
+  position: absolute;
+  margin-top: 1000px;
+  margin-left: 425px;
+  display: none;
+}
+#cerrar{
+  position: absolute;
+  right: 3px;
+  top: 1px;
+  
+}
+
+
+asidesuscripcion {
+  width: 1000px;
+  height: 900px;
+  float: left;
+}
+.suscripcion {
+  margin-top: 50px;
+  margin-left: 180px;
+	margin-bottom: 40px;
+	padding-bottom: 40px;
+}
+.login {
+  margin-left: 50px;
+  color: black;
+  background-color: #B9ADAD;
+  width: 500px;
+  height: 250px;
+}
+.register {
+  margin-left: 50px;
+  color: black;
+   background-color: #B9ADAD;
+  width: 500px;
+  height: 470px;
+}
+.login1 {
+  margin-left: 50px;
+  color: black;
+  width: 400px;
+  height: 30px;
+}
+.register2 {
+  margin-left: 50px;
+  color: black;
+  width: 400px;
+  height: 30px;
+}
+.botonr {
+  background-color: #FFD6D6;
+  font-size: 20px;
+  margin-left: 220px;
+  margin-top: 10px;
+  float: left;
+}
+
+
+
+asidecontacta {
+  text-align: center;
+  width: 1000px;
+  height: 800px;
+  float: left;
+}
+.contactotop {
+  margin-top: 60px;
+  font-size: 30px;
+  color: #B9ADAD;
+}
+
+.footerinicio {
+  background-color: #FFE2F0;
+  width: 1500px;
+  height: 100px;
+  float: left;
+}
+
+footer{
+  background-color: #FFDADA;
+  width: 1500px;
+  height: 100px;
+  float: left;
+}
+asidefooter {
+  text-align: center;
+  background-color:#FFD6D6 ;
+  width: 500px;
+  height: 130px;
+  float:left;
+}
+.contacto {
+  margin-left: 20px;
+  
+	float: left;
+	width: 450px;
+  height: 1000px;
+}
+sectionfooter1 {
+  margin-top: 35px;
+  width: 500px;
+  height: 600px;
+  float:left;
+}
+sectionfooter2 {
+  margin-top: 35px;
+  width: 700px;
+  height: 600px;
+  float:right;
+}
+
+
+.titleprincipal {
+  text-align: center;
+  font-family: Lucida Handwriting;
+  color: #FFD6D6;
+  font-size: 50px;
+}
+.titleopcionales {
+  text-align: center;
+  font-family: Lucida Handwriting;
+  color:#FFD6D6;
+  font-size: 20px;
+}
+.subtitulos {
+  FONT-SIZE: 30PX;
+  font-family: Lucida Handwriting;
+  text-align: CENTER;
+  color:#FFD6D6;
+}
+
+
+
+.img1 {
+  width: 150px;
+  height: 150px;
+}
+.img2 {
+  width: 250px;
+  height: 250px;
+}
+.imglogo1{
+  width: 150px;
+  height: 150px;
+  float:left;
+}
+.imglogo2{
+  width: 150px;
+  height: 150px;
+  float:right;
+}
+.imginicio1 {
+  margin-top: 65px;
+  width: 200px;
+  height: 200px;
+  float:left;
+}
+.imginicio2 {
+  margin-top: 65px;
+  width: 200px;
+  height: 200px;
+  float:right;
+}
+.imgprincipal1 {
+  width: 130px;
+  height: 13ch;
+  float:left;
+}
+.imgprincipal2{
+   width: 130px;
+  height: 130px;
+  float:right;
+}
+.imgblanco2{
+  width: 250px;
+  height: 600px;
+  margin-top: 970PX;
+}
+.imgblanco1{
+  width: 250px;
+  height: 600px;
+  margin-top: 970PX;
+}
+.imgblancomenu2{
+  width: 250px;
+  height: 600px;
+  margin-top: 1100PX;
+}
+.imgblancomenu1{
+  width: 250px;
+  height: 600px;
+  margin-top: 1100PX;
+}
+.imgblancosuscripcion2{
+  width: 250px;
+  height: 550px;
+  margin-top: 500PX;
+}
+.imgblancosuscripcion1{
+  width: 250px;
+  height: 550px;
+  margin-top: 500PX;
+}
+.imgblancoreserva2{
+  width: 250px;
+  height: 550px;
+  margin-top: 1130PX;
+}
+.imgblancoreserva1{
+  width: 250px;
+  height: 550px;
+  margin-top: 1130PX;
+}
+.imgblancocontacto{
+  width: 250px;
+  height: 500px;
+  margin-top: 385px;
+}
+.imgblancocontacto2{
+  width: 250px;
+  height: 500px;
+  margin-top:385px;
+}
+.imgpie{
+  width: 1500px;
+  height: 300px;
+}
+.imgpiecontacto {
+  margin-right: 100px;
+  width: 1000px;
+  height: 255px;
+  float: left;
+}
+.imgicono{
+  margin-top: px;
+  margin-right: px;
+  width: 50px;
+  height: 50px;
+}
+.imgstar {
+  margin-left: 400px;
+  margin-top: 650px;
+  width: 150px;
+  height: 150px;
+}
+.imggif1 {
+   width: 500px;
+  height: 500px;
+}
+.imggif2 {
+  width: 500px;
+  height: 500px; 
+  float: left;
+}
+.imggif3 {
+  width: 500px;
+  height: 500px;
+  float: right;
+}
+.imggif4 {
+  width: 500px;
+  height: 500px;
+  float: right;
+}
+
+
+
+
+
