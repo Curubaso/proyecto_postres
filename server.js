@@ -1,9 +1,9 @@
 const express = require('express');
-const { MongoClient, ObjectId } = require('mongodb'); // Importar ObjectId para buscar por id
+const { MongoClient, ObjectId } = require('mongodb');
 const path = require('path');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;  // Cambié aquí para puerto dinámico
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
